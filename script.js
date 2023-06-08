@@ -1,6 +1,6 @@
 // Modal created using info provided @ https://www.w3schools.com/howto/howto_css_modals.asp
 var modal = document.getElementById("myModal");
-var btn = document.getElementById("addBtn");
+var btn = document.getElementById("newBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
@@ -19,6 +19,10 @@ window.onclick = function(event) {
 }
 
 
+var save = document.getElementById('saveBtn');
+save.onclick = function() {
+  console.log('SAVE CLICKED!')
+}
 
 const table = document.querySelector('#table');
 
