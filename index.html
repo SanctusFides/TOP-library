@@ -11,14 +11,16 @@
 
 <body>
 
+  <h1>TOR Library</h1>
+
   <button id="newBtn">New Book</button>
 
   <div id="myModal" class="modal">
 
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h1>Add New Book</h1>
-      <div id="bookDetails">
+      <h2>Add New Book</h2>
+      <div id="bookDetails" class="book-details">
         <!-- <span class="modal-title">Title: </span> -->
         <p><input type='text' id='title' name='title' placeholder='Title'></p>
         <p><input type='text' id='author' name='author' placeholder='Author'></p>
@@ -27,12 +29,14 @@
         <input type="checkbox" name="status" id="readStatus">
       </div>
 
-      <button type='submit' form='form' id='saveBtn'>Save</button>
+      <button type='submit' form='form' id='saveBtn' class="save-btn">Save</button>
     </div>
-
   </div>
 
+  <div id="library" class="library">
+    Stuff will go here
 
+  </div>
 
   <script src="script.js"></script>
 </body>
