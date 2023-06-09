@@ -11,30 +11,38 @@
 
 <body>
 
-  <h1>TOR Library</h1>
+  <div class="content">
 
-  <button id="newBtn">New Book</button>
+    <h1>TOR Library</h1>
 
-  <div id="myModal" class="modal">
+    <button id="newBtn" class="new-button">New Book</button>
 
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Add New Book</h2>
-      <div id="bookDetails" class="book-details">
-        <!-- <span class="modal-title">Title: </span> -->
-        <p><input type='text' id='title' name='title' placeholder='Title'></p>
-        <p><input type='text' id='author' name='author' placeholder='Author'></p>
-        <p><input type='text' id='pages' name='pages' placeholder='Pages'></p>
-        <label for="readStatus">Finished Reading?</label>
-        <input type="checkbox" name="status" id="readStatus">
+    <div id="myModal" class="modal">
+
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Book</h2>
+        <div id="bookDetails" class="book-details">
+
+          <p><input type='text' id='title' name='title' placeholder='Title'></p>
+          <p><input type='text' id='author' name='author' placeholder='Author'></p>
+          <p><input type='number' id='pages' name='pages' placeholder='Number of Pages'></p>
+          
+          <div class="reading-status">
+            <label for="readStatus">Finished Reading?</label>
+            <input type="checkbox" name="status" id="readStatus">
+          </div>
+
+        </div>
+
+        <button type='submit' form='form' id='saveBtn' class="save-btn">Save</button>
       </div>
-
-      <button type='submit' form='form' id='saveBtn' class="save-btn">Save</button>
     </div>
-  </div>
 
-  <div id="library" class="library">
-    Stuff will go here
+    <div id="library" class="library">
+      Stuff will go here
+
+    </div>
 
   </div>
 
