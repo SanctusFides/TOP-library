@@ -22,25 +22,26 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Add New Book</h2>
-        <div id="bookDetails" class="book-details">
-
-          <p><input type='text' id='title' name='title' placeholder='Title'></p>
-          <p><input type='text' id='author' name='author' placeholder='Author'></p>
-          <p><input type='number' id='pages' name='pages' placeholder='Number of Pages'></p>
-          
-          <div class="reading-status">
-            <label for="readStatus">Finished Reading?</label>
-            <input type="checkbox" name="status" id="readStatus">
+        <form id="bookForm">
+          <div id="bookDetails" class="book-details">
+  
+            <p><input type='text' id='title' name='title' placeholder='Title'></p>
+            <p><input type='text' id='author' name='author' placeholder='Author'></p>
+            <p><input type='number' id='pages' name='pages' placeholder='Number of Pages'></p>
+  
+            <div class="reading-status">
+              <label for="readStatus">Finished Reading?</label>
+              <input type="checkbox" name="status" id="readStatus">
+            </div>
+  
           </div>
-
-        </div>
-
-        <button type='submit' form='form' id='saveBtn' class="save-btn">Save</button>
+          <button type='submit' id='saveBtn' class="save-btn" value="Save" onclick="Save()">Save</button>
+        </form>
       </div>
     </div>
 
     <div id="library" class="library">
-      Stuff will go here
+      w
 
     </div>
 
