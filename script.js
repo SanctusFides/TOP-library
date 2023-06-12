@@ -68,22 +68,69 @@ function tableUpdate() {
   })
 
   // Simply loops through the book list and packages together a row to be inserted into the table
+  // creating a variable to keep index count as it loops below
+  let indexCount = 0;
   myLibrary.forEach(book => {
     const title = book.title;
     const author = book.author;
     const pages = book.pages;
     const read = book.read;
+
     let row = table.insertRow();
     row.setAttribute("id", "Book");
+
+    // using the index count to set the value hidden on the table - this index is used to make updates in the list
+    let indexCell = row.insertCell();
+    indexCell.setAttribute('id', 'index-'+indexCount)
+    indexCount++;
+    indexCell.style.display = "none";
+
     let titleCell = row.insertCell();
     titleCell.textContent = title;
     let authorCell = row.insertCell();
     authorCell.textContent = author;
     let pagesCell = row.insertCell();
     pagesCell.textContent = pages;
-    // console.log(`${title} ${author} ${pages} ${read}`);
+
+    // Checks the true/false status of the book and sets text to match
+    let readCell = row.insertCell();
+    if (read === true) {
+      const status = document.createElement('text');
+      status.textContent = 'Completed'
+      readCell.appendChild(status);
+    } else {
+      const status = document.createElement('text');
+      status.textContent = 'Not Completed'
+      readCell.appendChild(status);
+    }
+
+    let buttonCell = row.insertCell();
+    const readingButton = document.createElement('button');
+    readingButton.textContent = 'Change Status'
+    readingButton.onclick = function() {
+      readUpdate();
+    };
+    buttonCell.appendChild(readingButton);
+
+
+    // ORIGINAL METHOD USING CHECK BOX INSTEAD OF TEXT
+    // if (read === true) {
+    //   var status = document.createElement('input');
+    //   status.setAttribute('type', 'checkbox');
+    //   status.checked = true;
+    //   readCell.appendChild(status);
+    // } else {
+    //   var status = document.createElement('input');
+    //   status.setAttribute('type', 'checkbox');
+    //   status.checked = false;
+    //   readCell.appendChild(status);
+    //   console.log('NOT TRUE');
+    // }
   });
-  // console.log(rows);
+}
+
+function readUpdate() {
+  console.log('CLICK!');
 }
 
 
