@@ -22,7 +22,8 @@ window.onclick = function (event) {
 // list that store the books to create a table from
 let myLibrary = [];
 // the Book constructor
-function Book(title, author, pages, read) {
+function Book(id, title, author, pages, read) {
+  this.id = id;
   this.title = title
   this.author = author
   this.pages = pages
@@ -32,6 +33,7 @@ function Book(title, author, pages, read) {
   }
 }
 
+let indexCount = 0;
 
 // function for when save button is clicked
 var save = document.getElementById('saveBtn');
@@ -41,12 +43,14 @@ save.onclick = function (event) {
   modal.style.display = "none";
 
   // Collects the user fields and packages them as a book- adding it to the list
+  const id = indexCount;
+  indexCount++;
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
   const status = document.getElementById('readStatus').checked;
 
-  const book = new Book(title, author, pages, status);
+  const book = new Book(id, title, author, pages, status);
   myLibrary.push(book);
   tableUpdate();
   // Resets the form fields for the next entry
@@ -68,9 +72,8 @@ function tableUpdate() {
   })
 
   // Simply loops through the book list and packages together a row to be inserted into the table
-  // creating a variable to keep index count as it loops below
-  let indexCount = 0;
   myLibrary.forEach(book => {
+    const id = book.id;
     const title = book.title;
     const author = book.author;
     const pages = book.pages;
@@ -81,9 +84,9 @@ function tableUpdate() {
 
     // using the index count to set the value hidden on the table - this index is used to make updates in the list
     let indexCell = row.insertCell();
-    indexCell.setAttribute('id', 'index-'+indexCount)
-    indexCount++;
+    indexCell.setAttribute('class', 'index')
     indexCell.style.display = "none";
+    indexCell.textContent = id;
 
     let titleCell = row.insertCell();
     titleCell.textContent = title;
@@ -105,33 +108,46 @@ function tableUpdate() {
     }
 
     let buttonCell = row.insertCell();
-    const readingButton = document.createElement('button');
+    let readingButton = document.createElement('button');
     readingButton.textContent = 'Change Status'
-    readingButton.onclick = function() {
+
+
+    readingButton.onclick = function () {
       readUpdate();
     };
+
     buttonCell.appendChild(readingButton);
-
-
-    // ORIGINAL METHOD USING CHECK BOX INSTEAD OF TEXT
-    // if (read === true) {
-    //   var status = document.createElement('input');
-    //   status.setAttribute('type', 'checkbox');
-    //   status.checked = true;
-    //   readCell.appendChild(status);
-    // } else {
-    //   var status = document.createElement('input');
-    //   status.setAttribute('type', 'checkbox');
-    //   status.checked = false;
-    //   readCell.appendChild(status);
-    //   console.log('NOT TRUE');
-    // }
   });
 }
 
+
+//This function takes the whole table and splits it into rows, then looping through the number of rows it
+// assigns a click handler to it that goes into that row and pulls out the ID so that it can be used to index
+// the book lists and change the value on the read status and then refreshes the table on the page 
 function readUpdate() {
-  console.log('CLICK!');
+  var table = document.getElementById("Library");
+  var rows = table.getElementsByTagName("tr");
+  for (i = 0; i < rows.length; i++) {
+    var currentRow = table.rows[i];
+    var createClickHandler =
+      function (row) {
+        return function () {
+          var cell = row.getElementsByTagName("td")[0];
+          var id = cell.innerHTML;
+          
+          let book = myLibrary[id];
+          if (book.read == true) {
+            book.read = false;
+          } else {
+            book.read = true;
+          }
+          tableUpdate();
+        };
+      };
+    currentRow.onclick = createClickHandler(currentRow);
+  }
 }
+window.onload = readUpdate();
 
 
 
