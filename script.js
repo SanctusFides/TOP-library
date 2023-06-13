@@ -33,8 +33,8 @@ function Book(id, title, author, pages, read) {
   }
 }
 
-let indexCount = 0;
 
+let indexCount = 0;
 // function for when save button is clicked
 var save = document.getElementById('saveBtn');
 save.onclick = function (event) {
@@ -43,8 +43,12 @@ save.onclick = function (event) {
   modal.style.display = "none";
 
   // Collects the user fields and packages them as a book- adding it to the list
+
+  // This can probably be replaced by the new reindexing function - but it works for now
   const id = indexCount;
   indexCount++;
+
+
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
@@ -107,16 +111,23 @@ function tableUpdate() {
       readCell.appendChild(status);
     }
 
-    let buttonCell = row.insertCell();
+    let statusCell = row.insertCell();
     let readingButton = document.createElement('button');
     readingButton.textContent = 'Change Status'
-
-
     readingButton.onclick = function () {
       readUpdate();
     };
+    statusCell.appendChild(readingButton);
 
-    buttonCell.appendChild(readingButton);
+    let deleteCell = row.insertCell();
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete'
+    deleteButton.onclick = function () {
+      deleteRow();
+    };
+    deleteCell.appendChild(deleteButton);
+
+
   });
 }
 
@@ -149,6 +160,33 @@ function readUpdate() {
 }
 window.onload = readUpdate();
 
+// Function will identify the row, grab the ID and then use splice to remove it - then it goes through the list
+// and adjusts all the index values of each book and then redraws the table with the updated index
+function deleteRow() {
+  var table = document.getElementById("Library");
+  var rows = table.getElementsByTagName("tr");
+  for (i = 0; i < rows.length; i++) {
+    var currentRow = table.rows[i];
+    var createClickHandler =
+      function (row) {
+        return function () {
+          var cell = row.getElementsByTagName("td")[0];
+          var id = cell.innerHTML;
+          myLibrary.splice(id,1);
+          reindex();
+          tableUpdate();
+        };
+      };
+    currentRow.onclick = createClickHandler(currentRow);
+  }
+}
+window.onload = deleteRow();
+// Loops through list to assign 
+function reindex() {
+  for (i = 0; i < myLibrary.length; i++) {
+    myLibrary[i].id = i; 
+  }
+}
 
 
 // Used for test printing to console
