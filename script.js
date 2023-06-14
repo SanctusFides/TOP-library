@@ -173,6 +173,7 @@ function deleteRow() {
           var cell = row.getElementsByTagName("td")[0];
           var id = cell.innerHTML;
           myLibrary.splice(id,1);
+          indexCount--;
           reindex();
           tableUpdate();
         };
@@ -181,6 +182,7 @@ function deleteRow() {
   }
 }
 window.onload = deleteRow();
+
 // Loops through list to assign 
 function reindex() {
   for (i = 0; i < myLibrary.length; i++) {
