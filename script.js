@@ -21,15 +21,50 @@ window.onclick = function (event) {
 
 // list that store the books to create a table from
 let myLibrary = [];
-// the Book constructor
-function Book(id, title, author, pages, read) {
-  this.id = id;
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
-  this.info = function () {
+// The book object class here
+class Book {
+  constructor(id, title, author, pages, read) {
+    this.id = id;
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
+  // info function not used, was just a part of the starting portion of the assignment
+  info() {
     return title + ' by ' + author + ", " + pages + " pages, " + read
+  }
+
+  get id() {
+    return this._id;
+  }
+  get title() {
+    return this._title;
+  }
+  get author() {
+    return this._author;
+  }
+  get pages() {
+    return this._pages;
+  }
+  get read() {
+    return this._read;
+  }
+
+  set id(x) {
+    this._id = x;
+  }
+  set title(x) {
+    this._title = x;
+  }
+  set author(x) {
+    this._author = x;
+  }
+  set pages(x) {
+    this._pages = x;
+  }
+  set read(x) {
+    this._read = x;
   }
 }
 
